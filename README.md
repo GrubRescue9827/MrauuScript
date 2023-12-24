@@ -4,7 +4,8 @@
 ## Installation
 
 Dependancies:
-* BASH (Obviously.)
+* BASH
 * [BARGS](https://github.com/unfor19/bargs)
 * jq
 * cURL
+* crontab
