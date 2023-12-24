@@ -1,2 +1,2 @@
-# MrauuScript
-A collection of BASH scripts to automate updating and managing a Minecraft Server.
+# MrauuScript (Pronounced: "MrowScript")
+**Minecraft Routine Automated Update Utilities** is a collection of various BASH scripts designed to make administering a Minecraft server easier!
