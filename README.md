@@ -14,3 +14,4 @@ Be sure you've installed the required dependancies:
 * jq (Optional, API parsing support for automated downloads.)
 * cURL
 * crontab
+* screen
