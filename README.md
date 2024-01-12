@@ -11,6 +11,7 @@
 * Automatic startup
 * Automatic backups
 * Optional alerts with ngrok and LocalToNet
+* Optional Tailscale automatic startup
 
 # Automatic Installation
 To be implemented
