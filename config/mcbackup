@@ -1,0 +1,17 @@
+---
+name=delete_previous
+short=x
+description=Keep only the last [n] backups.
+default=5
+---
+name=skip_server_checks
+short=ssc
+description=WARNING: THIS IS DANGEROUS! Forcefully skip all sanity checks, and do not restart server. Only to be used when calling from another script! [force_yes/y/n]
+default=n
+choices=force_yes y n
+---
+name=bargs
+description=mcbackup.sh -s /example/mc/ -d /mnt/backup/mc/ -x 3 --skip_server_checks y
+default=irrelevant
+---
+---

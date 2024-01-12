@@ -1,0 +1,34 @@
+---
+name=kill_running
+short=k
+default="y"
+choices=y n
+description=Attempt to forcefully restart any process that is already running.
+---
+name=graceful_shutdown
+short=g
+default="y"
+choices=y n
+description=Call stop script for java instead of forcefully killing it.
+---
+name=stop_script
+short=s
+default=/opt/MrauuScript/stop.sh
+description=Location of the stop script for the minecraft server.
+---
+name=startup_config
+short=c
+default=/opt/MrauuScript/config/startup/
+description=Location of the startup config directory.
+---
+name=bin
+short=e
+default=/opt/MrauuScript/bin/
+description=Location of binaries to execute.
+---
+name=bargs
+description=tbd
+skip_server_checks y
+default=irrelevant
+---
+---

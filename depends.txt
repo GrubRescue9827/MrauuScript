@@ -1,0 +1,7 @@
+screen
+jq
+crontab
+sudo
+localtonet
+ngrok
+java

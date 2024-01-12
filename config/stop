@@ -1,0 +1,36 @@
+---
+name=reason
+short=r
+default="Manual shutdown issued. Shutting down in "
+description=Shutdown reason to display.
+---
+name=graceperiod
+default="30"
+short=t
+description=Amount of time before shutdown, in seconds. Does not include "mercy countdown." Overriden by --force.
+---
+name=append_graceperiod
+short=a
+default=y
+description=Should the amount of time remaining be appended to the end of reason?
+---
+name=enable_mercycountdown
+short=m
+default=y
+description=Should there be a 5 second countdown before shutdown?
+---
+name=send_to
+short=k
+default=/opt/MrauuScript/servermsg.sh
+description=Script to execute when sending commands to server
+---
+name=force
+default=n
+short=f
+description=Immediately shut the server down. (Do not wait for graceperiod) [y/n]
+---
+name=bargs
+description=mcbackup.sh -s /opt/MrauuScript/bin/mc/ -d /opt/backup/mc-server/ -x 3 --skip_server_checks y
+default=irrelevant
+---
+---

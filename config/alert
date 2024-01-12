@@ -1,0 +1,19 @@
+---
+name=line1
+short=1
+description=ph
+---
+name=line2
+short=2
+description=ph
+allow_empty=true
+---
+name=channel
+short=c
+description=Name of file with webhook URL inside.
+---
+---
+name=bargs
+description=placeholder
+default=irrelevant
+---

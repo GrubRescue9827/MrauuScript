@@ -1,0 +1,20 @@
+---
+name=message
+short=m
+description=Message or command to send
+---
+name=execute
+short=e
+default=n
+description=Execute message as a COMMAND; do not print text to chat. [Y/N]
+---
+name=screenname
+short=s
+default=minecraft
+description=Name of the screen to put commands.
+---
+name=bargs
+description=mcbackup.sh -s /example/mc/ -d /mnt/backup/mc/ -x 3 --skip_server_checks y
+default=irrelevant
+---
+---
