@@ -1,17 +1,21 @@
 # MrauuScript
-**Minecraft Routine Automated Update Utilities** (Pronounced: "MrowScript") is a collection of various BASH scripts designed to make administering a Minecraft server easier! Designed for ultimate flexibility and mod-ability, MrauuScript should work on any *NIX OS with some minor edits.
+![https://github.com/GrubRescue9827/MrauuScript](./assets/logo.png "https://github.com/GrubRescue9827/MrauuScript")
+
+ **Minecraft Routine Automated Updates & Utilities** (Pronounced: "MrowScript") is a collection of various BASH scripts designed to make administering a Minecraft server easier.
 
 ## Features
-* Reboot periodically
-* Player-friendly shutdown (30s warning in chat)
-* Automated update utility for OS, MC, and Plugins
-* Fully modular, allowing for customization.
+* Modular design for flexibility
+* Automatic updates for plugins, server, and OS
+* "Soft" server shutdown
+* Easily send messages to server chat from command line
+* Automatic startup
+* Automatic backups
+* Optional alerts with ngrok and LocalToNet
 
-# Installation
-Be sure you've installed the required dependancies:
-* BASH
-* [BARGS](https://github.com/unfor19/bargs)
-* jq (Optional, API parsing support for automated downloads.)
-* cURL
-* crontab
-* screen
+# Automatic Installation
+To be implemented
+# Manual Install
+#### Set up CRONTAB
+MrauuScript relies on crontab for its automation capabilities.
+
+#### Create aliases
