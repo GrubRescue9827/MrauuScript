@@ -1,5 +1,5 @@
 # MrauuScript
-![https://github.com/GrubRescue9827/MrauuScript](./assets/logo.png "https://github.com/GrubRescue9827/MrauuScript")
+![https://github.com/GrubRescue9827/MrauuScript](./docs/assets/logo.png "https://github.com/GrubRescue9827/MrauuScript")
 
  **Minecraft Routine Automated Updates & Utilities** (Pronounced: "MrowScript") is a collection of various BASH scripts designed to make administering a Minecraft server easier.
 
