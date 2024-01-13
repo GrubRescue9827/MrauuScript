@@ -1,7 +1,5 @@
 screen
 jq
-crontab
+cronie
+curl
 sudo
-localtonet
-ngrok
-java
