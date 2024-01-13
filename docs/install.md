@@ -74,6 +74,6 @@ java -jar ./server.jar
 
 1. Place the LocalToNet/ngrok executable in its respective folder in the the `./bin/alerts/` directory.
 2. Make sure it is executable by your unprivileged user.
-3. MrauuScript requires some extra configuration to enable LocalToNet or Ngrok, see: `config-alerts.md`
+3. MrauuScript requires some extra configuration to enable LocalToNet or Ngrok, see: [Configuration - Alerts](./config-alerts.md)
 
 ## Install Tailscale (Optional)
