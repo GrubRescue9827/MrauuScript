@@ -15,8 +15,6 @@
 
 # Automatic Installation
 To be implemented
-# Manual Install
-#### Set up CRONTAB
-MrauuScript relies on crontab for its automation capabilities.
 
-#### Create aliases
+# Manual Install
+See [Installation Instructions](./docs/install.md)
