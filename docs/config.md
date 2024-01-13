@@ -1,7 +1,7 @@
 ﻿# Configuration
 MrauuScript mostly relies on BARGS as well as a global config file for configuration. Default config files can be found in ./config/
 
-#### Global config file
+#### Global config file (/root/.config/MrauuScript/globals.sh
 
 ```bash
 todo
@@ -22,7 +22,7 @@ All configurable options can be easily accessed via command line arguments. You 
 - ⚠️ BARGS cannot handle config files with a file extension.
 
 #### Custom Scripts
-In addition, MrauuScript can also be configured to use custom scripts or commands for all of its functions. This can be used to better suit your specific needs. See `config-advanced.md` for more detailed information.
+In addition, MrauuScript can also be configured to use custom scripts or commands for all of its functions. This can be used to better suit your specific needs. See [Advanced Configuration](./config-advanced.md) for more detailed information.
 
 #### Alerts
-See `config-alerts.md`.
+See [Configuring Alerts](./config-alerts.md).
