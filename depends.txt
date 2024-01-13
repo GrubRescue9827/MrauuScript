@@ -3,3 +3,4 @@ jq
 cronie
 curl
 sudo
+git
