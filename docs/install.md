@@ -15,7 +15,7 @@ sudo useradd gameuser
 3. Fix the permissions on your install directory to ensure `gameuser` has full access.
 
 ```bash
-sudo chown gameuser /opt/MrauuScript/
+sudo chown -R gameuser /opt/MrauuScript/
 ```
 
 4. Download MrauuScript
@@ -29,9 +29,11 @@ cd ./MrauuScript
 
 5. Create additional directories
 ```bash
+mkdir ./bin/
 mkdir ./bin/mc-server/
 
 # OPTIONAL:
+mkdir ./bin/alerts/
 mkdir ./bin/alerts/localtonet/
 mkdir ./bin/alerts/ngrok/
 ```
@@ -41,6 +43,8 @@ mkdir ./bin/alerts/ngrok/
 ```bash
 # Log out of gameuser
 exit
+# If not already, cd into install directory
+cd /opt/MrauuScript/
 
 sudo mkdir /root/.config/MrauuScript
 sudo mv ./globals.sh /root/.config/MrauuScript
@@ -50,7 +54,8 @@ sudo mv ./globals.sh /root/.config/MrauuScript
 Bargs is a framework for parsing command line arguments with BASH. Since my development is no good, my scripts heavily rely on it.
 
 ```bash
-curl -o ./config/bargs.sh https://raw.githubusercontent.com/unfor19/bargs/master/bargs.sh
+sudo -u gameuser curl -o ./config/bargs.sh https://raw.githubusercontent.com/unfor19/bargs/master/bargs.sh
+sudo chmod +x ./config/bargs.sh
 ```
 
 ## Install dependencies
@@ -61,19 +66,52 @@ Dependencies are listed in the `depends.txt` file. Package names and package man
 
 ```bash
 cd ./bin/mc-server
-curl -o server.jar <URL>
+sudo -u gameuser curl -o server.jar <URL>
 ```
 
 2. Run the server for first time and accept the EULA.
 
 ```bash
-java -jar ./server.jar
+sudo -u gameuser java -jar ./server.jar
+
+# Accept the EULA with your prefered text editor of choice.
+nano eula.txt
 ```
 
 ## Install LocalToNet/Ngrok (Optional)
 
 1. Place the LocalToNet/ngrok executable in its respective folder in the the `./bin/alerts/` directory.
-2. Make sure it is executable by your unprivileged user.
+
+```
+cd /opt/MrauuScript/bin/alerts/<localtonet or ngrok>
+sudo -u gameuser curl -o <localtonet or ngrok> <Download URL>
+```
+
+3. Make sure it is executable by your unprivileged user.
+
+```
+sudo chmod +x /opt/MrauuScript/bin/<localtonet or ngrok>/<localtonet or ngrok executable>
+```
+
 3. MrauuScript requires some extra configuration to enable LocalToNet or Ngrok, see: [Configuration - Alerts](./config-alerts.md)
 
 ## Install Tailscale (Optional)
+
+1. Use the automated installer found on the [Tailscale website](https://tailscale.com/download)
+2. Make sure the `tailscaled` daemon was enabled automatically
+
+```bash
+sudo systemctl status tailscaled
+
+# IF it does NOT say enabled:
+sudo systemctl enable tailscaled && sudo systemctl start tailscaled
+```
+
+3. Log into the Tailscale client via a web browser
+
+```
+tailscale up
+```
+
+## Configuration
+See [Configuration Documentation](./config.md)
