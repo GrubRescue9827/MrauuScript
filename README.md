@@ -3,6 +3,11 @@
 
  **Minecraft Routine Automated Updates & Utilities** (Pronounced: "MrowScript") is a collection of various BASH scripts designed to make administering a Minecraft server easier.
 
+ ![Static Badge](https://img.shields.io/badge/Made_With-BASH-red?style=flat) ![Static Badge](https://img.shields.io/badge/Made_By-FEMBOYS-purple?style=flat)
+
+
+ [![forthebadge](https://forthebadge.com/images/badges/0-percent-optimized.svg)](https://forthebadge.com) [![forthebadge](https://forthebadge.com/images/badges/contains-tasty-spaghetti-code.svg)](https://forthebadge.com)
+
 ## Features
 * Modular design for flexibility
 * Automatic updates for plugins, server, and OS
