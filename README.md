@@ -25,6 +25,14 @@
 Until someone makes a system for managing plugins that works _reliably_, this is the best solution I can come up with. As a temporary solution, you can use [pluGET](https://github.com/Neocky/pluGET) in conjunction with MrauuScript via some [manual configuration.](./config/pluGET)
 However, in my experience I found pluGET to be unreliable with certain plugins. Which is due to no fault by the dev, btw! Such a shame, as it works really well for like 90% of my plugins...
 
+## Roadmap - Planned functionality
+* Better configuration documentation
+* Automatic installer script (Manual install is too tedious! QwQ)
+* Test Microsoft Windows compatibility (or lack thereof?)
+* Automatic MrauuScript update installer
+* Support auto-updating ngrok or localtonet? / Support system packages
+* More extensive documentation regarding non-standard setups
+
 # Automatic Installation
 To be implemented
 
