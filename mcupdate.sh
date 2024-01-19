@@ -1,6 +1,13 @@
 #!/bin/bash
 
-source ~/.config/MrauuScript/globals.sh
+# Check for global config file
+globals="/etc/opt/MrauuScript/globals.sh"
+if [[ -f $globals ]]; then
+    source $globals
+else
+    echo "[FATAL][mcupdate] Config file not found: $globals"
+    exit 1
+fi
 
 export BARGS_VARS_PATH="$MrauuConfig/mcupdate"
 source $BargsLoc "$@"
@@ -34,11 +41,10 @@ fi
 if [ $skip_server == y ]; then
     echo "[WARN][mcupdate] Override: skipping server upgrade!"
 else
-    # Check for an update
+    echo "[INFO][mcupdate] Beginning backup..."
+    $BackupCommand
     echo "[INFO][mcupdate] Beginning server upgrade..."
-
-    $BackupCommand "$install_location"
-	echo "[ERROR] FIXME!"
+	$updateserverconf/server.sh
 fi
 
 # Plugins upgrade
@@ -46,11 +52,11 @@ if [ $skip_plugins == y ]; then
     echo "[WARN][mcupdate] Override: skipping plugin upgrades!"
 else
     echo "[INFO][mcupdate] Beginning plugin upgrades..."
+    $plupdate
 fi
 
 # Restart server
-echo "[INFO][mcupdate] Attempting to restart server..."
-if [ $wasrunning == 1 ]; then
+if [ "$wasrunning" == "1" ]; then
 	if [ $skip_restart == y ]; then
 		echo "[WARN][mcupdate] Override: Server will not be restarted due to user choice."
 	else

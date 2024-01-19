@@ -1,6 +1,13 @@
 #!/bin/bash
 
-source ~/.config/MrauuScript/globals.sh
+# Check for global config file
+globals="/etc/opt/MrauuScript/globals.sh"
+if [[ -f $globals ]]; then
+    source $globals
+else
+    echo "[FATAL][startup-ngrok] Config file not found: $globals"
+    exit 1
+fi
 
 # If API key hasn't been imported to gameuser yet, import it automatically from MrauuScript config file.
 # For some reason ~gameuser/.config/ isn't working for me. It tries to search for the LITERAL

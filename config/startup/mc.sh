@@ -1,7 +1,14 @@
 #!/bin/bash
 
-source ~/.config/MrauuScript/globals.sh
+# Check for global config file
+globals="/etc/opt/MrauuScript/globals.sh"
+if [[ -f $globals ]]; then
+    source $globals
+else
+    echo "[FATAL][startup-mc] Config file not found: $globals"
+    exit 1
+fi
 
 cd $MCInstall
 
-sudo screen -dmS "minecraft" sudo -u $UnprivilegedUser java -Xms2000M -Xmx3500M --add-modules=jdk.incubator.vector -jar ./server.jar --nogui || echo "[FATAL][startup-mc] Unhandled exception. Returned $?"
+sudo screen -dmS "minecraft" $javastartup || echo "[FATAL][startup-mc] Unhandled exception. Returned $?"

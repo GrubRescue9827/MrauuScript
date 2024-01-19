@@ -1,6 +1,13 @@
 #!/bin/bash
 
-source ~/.config/MrauuScript/globals.sh
+# Check for global config file
+globals="/etc/opt/MrauuScript/globals.sh"
+if [[ -f $globals ]]; then
+    source $globals
+else
+    echo "[FATAL][mcbackup] Config file not found: $globals"
+    exit 1
+fi
 
 export BARGS_VARS_PATH="$MrauuConfig/mcbackup"
 source $BargsLoc "$@"
@@ -49,5 +56,5 @@ if [ skip == 0 ]; then
 fi
 
 # Create backup folder if it doesn't exist
-mkdir -p $BackupLoc
-tar -v -czf $BackupLoc/$BackupName $MCInstall
+#mkdir -p $BackupLoc
+echo tar -v -czf $BackupLoc/$BackupName $MCInstall

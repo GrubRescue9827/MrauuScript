@@ -1,5 +1,10 @@
 # Manual Installation 
 
+## Install dependencies
+Dependencies are listed in the `depends.txt` file. Package names and package managers will vary depending on distro, so you'll have to manually install them. Most dependancies should be pre-installed.
+
+## MrauuScript Installation
+
 1. Create a directory where you will install MrauuScript.
 
 ```bash
@@ -38,7 +43,7 @@ mkdir ./bin/alerts/localtonet/
 mkdir ./bin/alerts/ngrok/
 ```
 
-6. Move `globals.sh` to `/root/.config`
+6. Move `globals.sh` to `/etc/opt/MrauuScript/globals.sh`
 
 ```bash
 # Log out of gameuser
@@ -46,8 +51,8 @@ exit
 # If not already, cd into install directory
 cd /opt/MrauuScript/
 
-sudo mkdir /root/.config/MrauuScript
-sudo mv ./globals.sh /root/.config/MrauuScript
+sudo mkdir /etc/opt/MrauuScript
+sudo mv ./config/globals.sh /etc/opt/MrauuScript/
 ```
 
 ## Install bargs
@@ -57,9 +62,6 @@ Bargs is a framework for parsing command line arguments with BASH. Since my deve
 sudo -u gameuser curl -o ./config/bargs.sh https://raw.githubusercontent.com/unfor19/bargs/master/bargs.sh
 sudo chmod +x ./config/bargs.sh
 ```
-
-## Install dependencies
-Dependencies are listed in the `depends.txt` file. Package names and package managers will vary depending on distro, so you'll have to manually install them. Most dependancies should be pre-installed.
 
 ## Install Minecraft Server
 1. For this step, you may use any server software of your choice. By default, MrauuScript is pre-configured with performance optimizations for `Purpur` but any java-based Minecraft server software will work with some modification. (See: `Using-Other-Servers.md`) Replace \<URL\> with the download URL of the server software of your preference.

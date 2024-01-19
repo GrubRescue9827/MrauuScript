@@ -1,6 +1,13 @@
 #!/bin/bash
 
-source ~/.config/MrauuScript/globals.sh
+# Check for global config file
+globals="/etc/opt/MrauuScript/globals.sh"
+if [[ -f $globals ]]; then
+    source $globals
+else
+    echo "[FATAL][watchdog] Config file not found: $globals"
+    exit 1
+fi
 
 ngktmp=$AlertConf/.ngk.tmp
 ltntmp=$AlertConf/.ltn.tmp

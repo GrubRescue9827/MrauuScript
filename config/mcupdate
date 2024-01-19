@@ -1,34 +1,4 @@
 ---
-name=update_command
-short=uc
-description=Location of upgrade-os.sh
-default=/opt/MrauuScript/config/update/debug.sh
----
-name=mc_update_command
-short=mcuc
-description=Location of update_server.sh
-default=/opt/MrauuScript/update-server.sh
----
-name=plugin_update_command
-short=pu
-default=/opt/MrauuScript/config/pdl/plupdate.sh
-description=Location of update-plugins.sh
----
-name=install_location
-short=i
-default=/opt/MrauuScript/bin/mc-server
-description=Location of the folder with server_executable inside.
----
-name=server_executable
-short=e
-default=server.jar
-description=Name of the server jarfile.
----
-name=stop_script
-short=s
-default=/opt/MrauuScript/stop.sh
-description=Location of the stop script for the minecraft server.
----
 name=mc_version
 short=ver
 allow_empty=true
@@ -38,10 +8,6 @@ name=backup_command
 short=b
 default="./mcbackup.sh --skip_server_checks force_yes -d ./backup/ -s "
 description=Script to use when backing up the server. Will append install_location to the end.
----
-name=api_handler
-default=/opt/MrauuScript/config/api.sh
-description=Unused? API script to use to find latest download URL. Read docs for more info.
 ---
 name=custom_script
 short=c
