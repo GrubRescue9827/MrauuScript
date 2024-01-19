@@ -1,7 +1,7 @@
 # Manual Installation 
 
 ## Install dependencies
-Dependencies are listed in the `depends.txt` file. Package names and package managers will vary depending on distro, so you'll have to manually install them. Most dependancies should be pre-installed.
+Dependencies are listed in the `depends.txt` file. Package names and package managers will vary depending on distro, so you'll have to manually install them. Most dependencies should be pre-installed.
 
 ## MrauuScript Installation
 
