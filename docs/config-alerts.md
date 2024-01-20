@@ -13,3 +13,9 @@ As a privileged user, create a basic text document in `./config/alerts/` for eac
 - ltn-api = LocalToNet API key
 
 ### Tailscale
+To configure Tailscale to run at startup of the Minecraft server, simply create the empty file: `./config/startup/ts-lock`
+
+```bash
+# Run this command from the MrauuScript install directory. [Default: /opt/MrauuScript/]
+touch ./config/startup/ts-lock
+```
