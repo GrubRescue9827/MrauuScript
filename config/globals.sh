@@ -31,15 +31,14 @@ downloadconf=$MrauuUpdateConf/download
 # ./config/update/ folder
 osupgrade=$MrauuUpdateConf/debug.sh
 
+#
 # Other script directories. Do not edit if you don't know what you're doing!
+#
 plupdate=$updatepluginsconf/manual.sh
 stop=$MrauuInstall/stop.sh
 run=$MrauuInstall/run.sh
 srvmsg=$MrauuInstall/servermsg.sh
 BackupCommand=$MrauuInstall/mcbackup.sh
-
-# Command to get the latest version and build of MC server.
-getlatestver=$updateserverconf/latest-purpur.sh
 
 # Username of an unprivileged user, to run the server software.
 # MAKE SURE THIS USER CAN:
@@ -55,9 +54,13 @@ BackupName=MC-Backup-$(date +"%Y-%m-%d-%H-%M-%S").tar.gz
 # Startup command for Minecraft Server
 javastartup="sudo -u $UnprivilegedUser java -Xms2000M -Xmx3500M --add-modules=jdk.incubator.vector -jar ./server.jar --nogui"
 
-# Command to get current MC server version.
-javaverget="$javastartup --version"
-
 # Upgrade configuration.
+ServerType=purpur
+# Command to get current MC server version. Likely doesn't change.
+#javaverget="echo [WARN] Server does not support getting current version."
+javaverget="$javastartup --version"
 MCCurrentVer="latest"
 pluginslist=$updatepluginsconf/plugins.csv
+
+# Command to get the latest version and build of MC server.
+getlatestver=$updateserverconf/latest-$ServerType.sh
