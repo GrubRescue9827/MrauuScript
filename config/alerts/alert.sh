@@ -16,8 +16,7 @@ webhook=$(cat $AlertConf/$channel)
 echo $webhook
 
 if [[ ! -z $line1 && ! -z $line2 ]]; then
-    payload=$(echo -n -e "{\"content\": \"")$(echo -n \# \:warning\: New IP\(s\)\! \:warning\:\\n)$(echo -n -e \#\# \<\:jva0\:1158592565436751942\>\<\:jva1\:1158592563729682452\>\<\:jva2\:1158592561431183390\> \`$line1\`)$(echo -n \\n)$(echo -n -e \#\# \<\:brk0\:1158592824950931457\>\<\:brk1\:1158592823872983153\>\<\:brk2\:1158592822744731718\>\<\:brk3\:1158592820437852240\> \`$line2\`)$(echo -n -e "\"}")
-    #payload=$(echo -n -e "{\"content\": \"")$(echo -n \`$line1\`\\n\`$line2\`)$(echo -n -e "\"}")
+    payload=$(echo -n -e "{\"content\": \"")$(echo -n \`$line1\`\\n\`$line2\`)$(echo -n -e "\"}")
 elif [[ ! -z $line1 ]]; then
     payload=$(echo -n -e "{\"content\": \"")$(echo -n -e \`$line1\`)$(echo -n -e "\"}")
 else
