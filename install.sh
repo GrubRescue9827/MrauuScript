@@ -236,10 +236,10 @@ echo "[INFO] Install Dependencies..."
 source /etc/os-release || echo "[WARN] Failed to find /etc/os-release!"
 
 if [[ "$ID_LIKE" == "" ]]; then
-    echo "[WARN] ID_LIKE not set, assuming OS name: '$NAME'"
+    echo "[WARN] ID_LIKE not set, assuming OS name: '$ID'"
     osname=$ID
 elif [[ "$ID" == "" ]]; then
-    echo "[WARN] OSNAME not set!"
+    echo "[WARN] OS ID not set!"
     osname=$OSTYPE
 else
     osname=$ID_LIKE
