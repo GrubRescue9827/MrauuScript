@@ -237,8 +237,8 @@ source /etc/os-release || echo "[WARN] Failed to find /etc/os-release!"
 
 if [[ "$ID_LIKE" == "" ]]; then
     echo "[WARN] ID_LIKE not set, assuming OS name: '$NAME'"
-    osname=$NAME
-elif [[ "$NAME" == "" ]]; then
+    osname=$ID
+elif [[ "$ID" == "" ]]; then
     echo "[WARN] OSNAME not set!"
     osname=$OSTYPE
 else
