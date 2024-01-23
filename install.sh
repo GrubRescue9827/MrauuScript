@@ -18,12 +18,12 @@ srvurl="https://api.purpurmc.org/v2/purpur/1.20.4/latest/download"
 # ============
 # copies pre-downloaded files instead of downloading them from web.
 # THIS WILL OVERRIDE DEFAULTS!
-localonly="y"
-bargsurl="/mnt/MrauuDev/dl/bargs.sh"
-ltnurl="/mnt/MrauuDev/dl/ltn.zip"
-ngkurl="/mnt/MrauuDev/dl/ngk.tgz"
-srvurl="/mnt/MrauuDev/dl/server.jar"
-MrauuURL="/mnt/MrauuDev/dl/MrauuScript/"
+# localonly="y"
+# bargsurl="/mnt/MrauuDev/dl/bargs.sh"
+# ltnurl="/mnt/MrauuDev/dl/ltn.zip"
+# ngkurl="/mnt/MrauuDev/dl/ngk.tgz"
+# srvurl="/mnt/MrauuDev/dl/server.jar"
+# MrauuURL="/mnt/MrauuDev/dl/MrauuScript/"
 
 # ========
 # ADVANCED
