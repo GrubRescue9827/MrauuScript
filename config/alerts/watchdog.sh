@@ -100,5 +100,5 @@ fi
 
 if [[ ! -z "$ngkchanged" && "$ltnchanged" ]]; then
     echo both changed!
-    $AlertConf/alert.sh -1 "$parsedngk" -2 "$parsedltn" -c admin
+    $AlertConf/alert.sh -1 "$parsedngk" -2 "$parsedltn" -c webhook
 fi
