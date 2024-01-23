@@ -34,7 +34,7 @@ However, in my experience I found pluGET to be unreliable with certain plugins. 
 # Automatic Installation
 
 ```bash
-curl https://raw.githubusercontent.com/GrubRescue9827/MrauuScript/main/install.sh | bash
+curl -o ./install.sh https://raw.githubusercontent.com/GrubRescue9827/MrauuScript/main/install.sh && bash ./install.sh
 ```
 
 # Manual Install
