@@ -26,7 +26,7 @@ BackupName=MC-Backup-$(date +"%Y-%m-%d-%H-%M-%S").tar.gz
 
 The most important settings to change here are:
 - `osupgrade` Defines what script to use when updating the OS. See the [update folder](../config/update/) for a list of options, or [make your own
-](./config-advanced) if your prefered package manager isn't listed.
+](./config-advanced.md) if your prefered package manager isn't listed.
 - `MrauuInstall` Defines the install location of the MrauuScript folder. All subsequent folders should use relative pathing from this folder by default.
 
 
