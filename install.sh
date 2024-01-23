@@ -18,12 +18,12 @@ srvurl="https://api.purpurmc.org/v2/purpur/1.20.4/latest/download"
 # ============
 # copies pre-downloaded files instead of downloading them from web.
 # THIS WILL OVERRIDE DEFAULTS!
-# localonly="y"
-# bargsurl="/mnt/MrauuDev/dl/bargs.sh"
-# ltnurl="/mnt/MrauuDev/dl/ltn.zip"
-# ngkurl="/mnt/MrauuDev/dl/ngk.tgz"
-# srvurl="/mnt/MrauuDev/dl/server.jar"
-# MrauuURL="/mnt/MrauuDev/dl/MrauuScript/"
+localonly="y"
+bargsurl="/mnt/MrauuDev/dl/bargs.sh"
+ltnurl="/mnt/MrauuDev/dl/ltn.zip"
+ngkurl="/mnt/MrauuDev/dl/ngk.tgz"
+srvurl="/mnt/MrauuDev/dl/server.jar"
+MrauuURL="/mnt/MrauuDev/dl/MrauuScript/"
 
 # ========
 # ADVANCED
@@ -92,13 +92,11 @@ if [[ ! -z "$input" ]]; then MrauuInstall="$input"; fi
 read -r -p "Enter a name for a *new* user to run the Minecraft server [$UnprivilegedUser]: " input
 if [[ ! -z "$input" ]]; then UnprivilegedUser="$input"; fi
 
-read -r -p "Do you wish to setup alerts? [y/N]: " input
+read -r -p "Do you wish to setup ngrok, localtonet, or tailscale? [y/N]: " input
 case "$input" in
     [yY][eE][sS]|[yY])
-        echo "Beginning alerts configuration."
-        # Because user can and will do *any* input (y/Y/yES/Yes/etc...) this just sets it to a *known* non-empty string.
-        # Originally I was going to do this with nested case statements. I never wish to return to hell again.
-        alerts="Nya~!"
+        echo "Beginning Reverse proxy/VPN configuration."
+        revpn="y"
         ;;
     *)
         echo "You may configure alerts manually at any time if you change your mind."
@@ -106,10 +104,7 @@ case "$input" in
         ;;
 esac
 
-# My hope is that this code is so horrifically inefficient and awful to read that some 3-letter agency specializing in neutralizing bad programmers comes to my door and
-# forcefully installs microsoft windows on my main PC so that I may never use BASH again. Well, jokes on them I'm even worse at BATCH!
-
-if [[ "$alerts" == "Nya~!" ]]; then
+if [[ "$revpn" == "y" ]]; then
     read -r -p "Do you wish to use Ngrok? [y/N]: " input
         case "$input" in
         [yY][eE][sS]|[yY])
@@ -140,7 +135,8 @@ if [[ "$alerts" == "Nya~!" ]]; then
             ;;
     esac
 fi
-# Still more alerts stuff. This should NEVER trigger if the above didn't. If that happens... panic?
+
+# Still more Reverse proxy/VPN stuff. This should NEVER trigger if the above didn't. If that happens... panic?
 if [[ "$ngk" == "y" ]]; then
     echo "[WARN] This data will be saved to the disk in PLAIN TEXT for configuration purposes! It will NOT be used or saved anywhere else."
     read -r -p "Enter your ngrok Authtoken: " ngkauth
@@ -168,7 +164,20 @@ if [[ $ts == "y" ]]; then
     read -n 1 -s -r -p "Press any key to aknowledge."
 fi
 
-if [[ "$alerts" == "Nya~!" ]]; then echo "Alerts configuration completed."; fi
+if [[ "$revpn" == "y" ]]; then echo "Reverse proxy/VPN configuration completed."; fi
+
+if [[ "$ngk" == "y" || "$ltn" == "y" ]]; then
+    read -r -p "Do you wish to send IP change alerts to a Discord Webhook? [y/N]:" input
+    case "$input" in
+        [yY][eE][sS]|[yY])
+            read -r -p "Enter Discord Webhook URL: " alerturl
+            ;;
+        *)
+            echo "You may configure alerts manually at any time if you change your mind."
+            echo "Alert documentation can be found at: https://github.com/GrubRescue9827/MrauuScript/blob/main/docs/config-alerts.md"
+            ;;
+    esac
+fi
 
 read -r -p "Do you wish to download and install a Minecraft server? [y/N]: " input
 case "$input" in
@@ -209,6 +218,7 @@ echo "    ShouldInstall: \"$ltn\""
 echo "    URL: \"$ltnurl\""
 echo "    Authtoken: \"$ltnauth\""
 echo "    APIKey: \"$ltnapi\""
+echo "Webhook: $alerturl"
 echo "Tailscale:"
 echo "    ShouldInstall: \"$ts\""
 echo "Server:"
@@ -267,8 +277,19 @@ case $osname in
     sudo apk add $deps
     ;;
     rocky|almalinux|fedora|rhel|ol|centos)
-    sudo dnf update
-    sudo dnf install $deps
+    # Potential bug with dnf? Super bizarre.
+    # For some reason, despite the dependencies being in repositories, DNF just skips half the packages.
+    # On Fedora 38:
+    #     screen wasn't installed after running this script.
+    #     screen WAS found in the repo with "sudo dnf search screen"
+    #     screen was NOT listed at all in the output of the script.
+    #     manually installing screen with "sudo dnf install screen -y" worked.
+    #     replicating the same command the script does did NOT work, even when changing the order of packages.
+    # WTF.jpg?
+    echo "[WARN] You are using DNF. DNF seems to have issues installing multiple packages at once for some reason."
+    echo "[WARN] You may have to manually install missing packages after install."
+    sudo dnf update -y
+    sudo dnf install $deps -y
     ;;
     darwin)
     echo "[WARN] MacOS support is untested! Expect jank!"
@@ -370,7 +391,7 @@ fi
 sudo chown -R $UnprivilegedUser:$UnprivilegedUser $MrauuInstall/config/bargs.sh
 
 echo "[INFO] Making files executable..."
-sudo chmod +x $MrauuInstall/config/bargs.sh
+find "$MrauuInstall" -type f -name "*.sh" -exec sudo chmod +x {} \;
 
 if [[ "$srv" == "y" ]]; then
     echo "[INFO] Installing Java server..."
@@ -401,6 +422,10 @@ if [[ $ltn == "y" ]]; then
     echo "$ltnapi" > $MrauuInstall/config/alerts/ltn-api
 fi
 
+if [[ ! -z "$alerturl" ]]; then
+    echo "$alerturl" > $MrauuInstall/config/alerts/main
+fi
+
 if [[ $ts == "y" ]]; then
     touch $MrauuInstall/config/startup/ts-lock
     sudo systemctl enable tailscaled
@@ -409,9 +434,16 @@ fi
 echo "[INFO] Cleaning up..."
 sudo rm -ri $tmp
 sudo rm -i $MrauuInstall/install.sh
+sudo rm -i $MrauuInstall/depends.txt
 
 echo "Install complete! You can start MrauuScript by running: $MrauuInstall/run.sh"
 echo "Documentation is available in the directory $MrauuInstall/docs/"
 echo "Up-to-date documentation is available on Github."
 echo ""
 echo "Enjoy your Minecraft server!"
+echo ""
+echo ""
+echo ""
+echo "[WARN] MrauuScript's auto installer currently cannot setup crontab automatically."
+echo "This means that commands will ONLY run when you run them from the command line."
+echo "Configure and enable scheduled commands by adding them to the root account's crontab."
