@@ -22,19 +22,20 @@
 * Automatic server updates only applicable for Purpur servers. (Relies on the download URL supporting "latest" as a valid version/build.)
 * Automatic plugin updates are psudo-manual. (Enter URL, script blindly downloads it regardless of if an update is needed or not.)
 
-Until someone makes a system for managing plugins that works _reliably_, this is the best solution I can come up with. As a temporary solution, you can use [pluGET](https://github.com/Neocky/pluGET) in conjunction with MrauuScript via some [manual configuration.](./config/pluGET)
+Until someone makes a system for managing plugins that works _reliably_, this is the best solution I can come up with. As a temporary solution, you can use [pluGET](https://github.com/Neocky/pluGET) in conjunction with MrauuScript via some [manual configuration.](./config/pluGET.md)
 However, in my experience I found pluGET to be unreliable with certain plugins. Which is due to no fault by the dev, btw! Such a shame, as it works really well for like 90% of my plugins...
 
 ## Roadmap - Planned functionality
-* Better configuration documentation
-* Automatic installer script (Manual install is too tedious! QwQ)
-* Test Microsoft Windows compatibility (or lack thereof?)
+* Test WSL compatibility
 * Automatic MrauuScript update installer
 * Support auto-updating ngrok or localtonet? / Support system packages
-* More extensive documentation regarding non-standard setups
+* More extensive documentation
 
 # Automatic Installation
-To be implemented
+
+```bash
+curl https://raw.githubusercontent.com/GrubRescue9827/MrauuScript/main/install.sh | bash
+```
 
 # Manual Install
 See [Installation Instructions](./docs/install.md)
