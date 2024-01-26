@@ -25,7 +25,7 @@ ToDL=()
 
 # Parse CSV and ask for download URL from user
 for line in "${ARRAY[@]}"; do
-    IFS=',' read -r col1 col2 <<< "$line"
+    IFS=',' read -r col1 col2 col3 <<< "$line"
     echo "For plugin: $col1"
     echo "$col2"
 
@@ -38,7 +38,7 @@ echo "[INFO][plugins-update] No further user input required!"
 
 # Parse CSV AGAIN. This is probably really bad but oh wells.
 for i in "${!ARRAY[@]}"; do
-    IFS=',' read -r col1 col2 <<< "${ARRAY[$i]}"
+    IFS=',' read -r col1 col2 col3 <<< "${ARRAY[$i]}"
 
     # Grab the scraped URL from last step
     url="${ToDL[$i]}"
