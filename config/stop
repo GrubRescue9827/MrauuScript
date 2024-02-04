@@ -19,18 +19,18 @@ short=m
 default=y
 description=Should there be a 5 second countdown before shutdown?
 ---
-name=send_to
-short=k
-default=/opt/MrauuScript/servermsg.sh
-description=Script to execute when sending commands to server
----
 name=force
 default=n
 short=f
 description=Immediately shut the server down. (Do not wait for graceperiod) [y/n]
 ---
+name=tostop
+short=s
+choices=all netonly mc ngk ltn ts
+description=What processes should be stopped?
+---
 name=bargs
-description=mcbackup.sh -s /opt/MrauuScript/bin/mc/ -d /opt/backup/mc-server/ -x 3 --skip_server_checks y
+description=stop.sh -r \"Restarting in \" -a y -t 30 -m y -f y -s mc
 default=irrelevant
 ---
 ---

@@ -13,6 +13,7 @@ fi
 export BARGS_VARS_PATH="$MrauuConfig/stop"
 source $BargsLoc "$@"
 
+function stopmc () {
 # Check if server is already stopped
 if pgrep -x "java" > /dev/null
 then
@@ -64,13 +65,6 @@ $srvmsg -m "$text"
 echo "[INFO][stop] Sending shutdown signal..."
 $srvmsg -m "stop" -e "y"
 
-# Turn off Localtonet or Ngrok
-processes=("localtonet" "ngrok" "tailscale")
-for pname in "${processes[@]}"; do
-    echo "[WARN][stop] Forcefully killing process: $pname"
-    pkill $pname
-done
-
 # See if server has stopped yet. if not, warn user.
 while pgrep -x "java" > /dev/null
 do
@@ -86,4 +80,47 @@ do
     done
     exit
 done
+}
 
+function stopltn () {
+    echo "[WARN] Forcefully killing localtonet!"
+    sudo pkill localtonet
+}
+
+function stopngk () {
+    echo "[WARN] Forcefully killing ngrok!"
+    sudo pkill ngrok
+}
+
+function stopts () {
+    sudo tailscale down
+}
+
+case "$tostop" in
+    all)
+        stopmc
+        stopltn
+        stopngk
+        stopts
+        ;;
+    netonly)
+        stopltn
+        stopngk
+        stopts
+        ;;
+    mc)
+        stopmc
+        ;;
+    ngk)
+        stopngk
+        ;;
+    ltn)
+        stopltn
+        ;;
+    ts)
+        stopts
+        ;;
+    *)
+        echo "[ERROR] Invalid process name: $tostop"
+        ;;
+esac
