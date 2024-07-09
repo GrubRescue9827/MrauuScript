@@ -3,7 +3,7 @@ MrauuScript mostly relies on BARGS as well as a global config file for configura
 
 ## Global config file
 
-Directories, script locations, and any other variable that is used more than once is stored in the global "config" file `/root/.config/MrauuScript/globals.sh`
+Directories, script locations, and any other variable that is used more than once is stored in the global "config" file `/etc/opt/MrauuScript/globals.sh`
 This file creates variables that are used in multiple scripts.
 
 ```bash
