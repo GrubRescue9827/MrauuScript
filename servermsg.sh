@@ -5,7 +5,7 @@ globals="/etc/opt/MrauuScript/globals.sh"
 if [[ -f $globals ]]; then
     source $globals
 else
-    echo "[FATAL][servermsg] Config file not found: $globals"
+    $fatal "[FATAL][servermsg] Config file not found: $globals"
     exit 1
 fi
 
@@ -17,9 +17,7 @@ send () {
 
     # Append enter to the end of text to make it send.
     message=$message$(printf \\r)
-    #./test.sh "$text"
-    sudo screen -S $screenname -X stuff "$message" || echo "[FATAL] Unhandled exception: screen returned $? - Is the server running?" && exit 1
-    #echo "[DEBUG][servermsg] $message"
+    sudo screen -S $screenname -X stuff "$message" || $fatal "[FATAL] Unhandled exception: screen returned $? - Is the server running?" && exit 1
 }
 
 format () {
@@ -30,8 +28,8 @@ format () {
 if [ $execute == n ]; then
     format
     send
-    echo "[INFO][servermsg] Message sent."
+    $info "[INFO][servermsg] Message sent."
 else
     send
-    echo "[INFO][servermsg] Command sent."
+    $info "[INFO][servermsg] Command sent."
 fi
