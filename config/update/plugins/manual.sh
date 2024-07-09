@@ -47,5 +47,3 @@ for i in "${!ARRAY[@]}"; do
     # use gameuser to prevent permissions issues.
     sudo -u $UnprivilegedUser curl --location --output "$MCInstall/plugins/$col1" $url
 done
-
-
