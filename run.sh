@@ -5,7 +5,7 @@ globals="/etc/opt/MrauuScript/globals.sh"
 if [[ -f $globals ]]; then
     source $globals
 else
-    echo "[FATAL][run] Config file not found: $globals"
+    $fatal "[FATAL][run] Config file not found: $globals"
     exit 1
 fi
 
@@ -15,16 +15,16 @@ source $BargsLoc "$@"
 function runmc () {
     if pgrep -x "java" > /dev/null
     then
-        echo "[WARN] Process already running: java"
+        $info "[INFO][run] Process already running: java"
         if [ "$force_restart" == "y" ]; then
             $stop -r "Restarting in " -s $torun
         else
-            warn=1
+            userwarn=1
             return
         fi
     fi
-    echo "[INFO] Starting Server..."
-    $StartupConf/mc.sh || echo "[ERROR] Unhandled exception: $StartupConf/mc.sh returned $?"
+    $info "[INFO][run] Starting Server..."
+    $StartupConf/mc.sh || $error "[ERROR][run] Unhandled exception: $StartupConf/mc.sh returned $?"
 }
 
 function runltn () {
@@ -34,16 +34,16 @@ function runltn () {
 
     if pgrep -x "localtonet" > /dev/null
     then
-        echo "[WARN] Process already running: localtonet"
+        $info "[INFO][run] Process already running: localtonet"
         if [ "$force_restart" == "y" ]; then
             sudo pkill localtonet
         else
-            warn=1
+            userwarn=1
             return
         fi
     fi
-    echo "[INFO] Starting localtonet..."
-    $StartupConf/localtonet.sh || echo "[ERROR] Unhandled exception: $StartupConf/localtonet.sh returned $?"
+    $info "[INFO][run] Starting localtonet..."
+    $StartupConf/localtonet.sh || $error "[ERROR][run] Unhandled exception: $StartupConf/localtonet.sh returned $?"
 }
 
 function runngk () {
@@ -53,16 +53,16 @@ function runngk () {
 
     if pgrep -x "ngrok" > /dev/null
     then
-        echo "[WARN] Process already running: ngrok"
+        $info "[INFO][run] Process already running: ngrok"
         if [ "$force_restart" == "y" ]; then
             sudo pkill ngrok
         else
-            warn=1
+            userwarn=1
             return
         fi
     fi
-    echo "[INFO] Starting ngrok..."
-    $StartupConf/ngrok.sh || echo "[ERROR] Unhandled exception: $StartupConf/ngrok.sh returned $?"
+    $info "[INFO][run] Starting ngrok..."
+    $StartupConf/ngrok.sh || $error "[ERROR][run] Unhandled exception: $StartupConf/ngrok.sh returned $?"
 }
 
 function runts () {
@@ -72,16 +72,34 @@ function runts () {
 
     if pgrep -x "tailscaled" > /dev/null
     then
-        echo "[WARN] Process already running: tailscale"
+        $info "[INFO][run] Process already running: tailscale"
         if [ "$force_restart" == "y" ]; then
             sudo tailscale down
         else
-            warn=1
+            userwarn=1
             return
         fi
     fi
-    echo "[INFO] Starting tailscale..."
-    $StartupConf/ts.sh || echo "[ERROR] Unhandled exception: $StartupConf/ts.sh returned $?"
+    $info "[INFO][run] Starting tailscale..."
+    $StartupConf/ts.sh || $error "[ERROR][run] Unhandled exception: $StartupConf/ts.sh returned $?"
+}
+
+function runwg () {
+    #if [[ ! -f $StartupConf/wg-conf ]]; then
+        #return
+    #fi
+
+    if [[ -z "$(wg show)" ]]; then
+        $info "[INFO][run] Process already running: wireguard"
+        if [ "$force_restart" == "y" ]; then
+            sudo wg-quick down $(cat $StartupConf/wg-conf)
+        else
+            userwarn=1
+            return
+        fi
+    fi
+    $info "[INFO][run] Starting wireguard..."
+    sudo wg-quick up $(cat $StartupConf/wg-conf) || $error "[ERROR][run] Unhandled exception: wg-quick returned $?"
 }
 
 
@@ -91,11 +109,13 @@ case "$torun" in
         runltn
         runngk
         runts
+	runwg
         ;;
     netonly)
         runltn
         runngk
         runts
+	runwg
         ;;
     mc)
         runmc
@@ -109,11 +129,14 @@ case "$torun" in
     ts)
         runts
         ;;
+    wg)
+        runwg
+        ;;
     *)
-        echo "[ERROR] Invalid process name: $torun"
+        $error "[ERROR][run] Invalid process name: $torun"
         ;;
 esac
 
-if [[ "$warn" == 1 ]]; then
-    echo "[ERROR] One or more processes were not restarted because --force_restart was not specified."
+if [[ "$userwarn" == 1 ]]; then
+    $info "[INFO][run] One or more processes were not restarted because --force_restart was not specified."
 fi
