@@ -5,7 +5,7 @@ globals="/etc/opt/MrauuScript/globals.sh"
 if [[ -f $globals ]]; then
     source $globals
 else
-    echo "[FATAL][alert] Config file not found: $globals"
+    $fatal "[FATAL][alert] Config file not found: $globals"
     exit 1
 fi
 
@@ -20,7 +20,7 @@ if [[ ! -z $line1 && ! -z $line2 ]]; then
 elif [[ ! -z $line1 ]]; then
     payload=$(echo -n -e "{\"content\": \"")$(echo -n -e \`$line1\`)$(echo -n -e "\"}")
 else
-    echo "[FATAL][alert] Required argument not found."
+    $fatal "[FATAL][alert] Required argument not found."
 fi
 
 echo "[INFO][alert] Sending alert..."
@@ -28,8 +28,8 @@ response=$(curl -sS -o /dev/null -i -w "%{http_code}\n"  -H 'Accept: application
 
 if [ ! "$response" == "204" ]; then
     if [[ -z $response ]]; then
-        echo "[ERROR][alert] cURL returned no response!"
+        $error "[ERROR][alert] cURL returned no response!"
     else
-        echo "[ERROR][alert] Unrecognized response: $response"
+        $error "[ERROR][alert] Unrecognized response: $response"
     fi
 fi
