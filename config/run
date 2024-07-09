@@ -5,7 +5,7 @@ default="n"
 choices=y n
 description=Attempt to forcefully start a process that is already running.
 ---
-name=run
+name=torun
 short=r
 choices=all netonly mc ngk ltn ts
 description=What process should be ran?
