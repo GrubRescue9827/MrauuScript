@@ -5,7 +5,7 @@ globals="/etc/opt/MrauuScript/globals.sh"
 if [[ -f $globals ]]; then
     source $globals
 else
-    echo "[FATAL][startup-ngrok] Config file not found: $globals"
+    $fatal "[FATAL][startup-ngrok] Config file not found: $globals"
     exit 1
 fi
 
@@ -15,7 +15,7 @@ fi
 # directory doesn't exist or is different from default, this breaks. TOO BAD!
 conf=$(echo /home/$UnprivilegedUser/.config/ngrok/ngrok.yml)
 if [[ ! -f $conf ]]; then
-    echo "[WARN][startup-ngrok] $conf does NOT exist! Attempting to create..."
+    $warn "[WARN][startup-ngrok] $conf does NOT exist! Attempting to create..."
 
     # Technically not necessary, but just to be kind to ngrok.
     # In case it tries to save a file to the working directory,
@@ -28,4 +28,4 @@ fi
 
 cd $bin/alerts/ngrok/
 
-sudo screen -dmS "ngrok" sudo -u $UnprivilegedUser ./ngrok tcp 25565 || echo "[ERROR][startup-ngrok] Unhandled exception. Returned $?"
+sudo screen -dmS "ngrok" sudo -u $UnprivilegedUser ./ngrok tcp 25565 --log "./ngk.log" || $error "[ERROR][startup-ngrok] Unhandled exception. Returned $?"
