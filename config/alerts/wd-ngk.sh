@@ -5,7 +5,7 @@ globals="/etc/opt/MrauuScript/globals.sh"
 if [[ -f $globals ]]; then
     source $globals
 else
-    echo "[FATAL][wd-ngk] Config file not found: $globals"
+    $fatal "[FATAL][wd-ngk] Config file not found: $globals"
     exit 1
 fi
 
